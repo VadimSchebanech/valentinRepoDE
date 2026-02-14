@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>❤️</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+
+    background: radial-gradient(circle, #1a0010, #33001a);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+
+    cursor: default;
+    overflow: hidden;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+
+    width: fit-content;
+    height: auto;
+    padding:50px;
+    /* background:#33001a; */
+    border-radius:20px;
+}
+
+.card {
+    text-align: center;
+    animation: fadeIn 1s ease forwards;
+}
+
+/* Заголовок */
+.title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* Пульсация сердца */
+.heart {
+    display: inline-block;
+    animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.35); }
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+
+.button-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top:30px;
+    height:100px;
+}
+
+button {
+    padding: 14px 34px;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+/* YES Glow */
+.yes {
+    background: linear-gradient(135deg, #ff4d6d, #ff758f);
+    color: white;
+    box-shadow: 0 0 12px rgba(255,77,109,0.6),
+                0 0 30px rgba(255,77,109,0.35);
+}
+
+.yes:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 25px rgba(255,77,109,0.9);
+}
+
+/* NO */
+.no {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    backdrop-filter: blur(6px);
+}
+
+
+.float-heart {
+    position: absolute;
+    bottom: -20px;
+    animation: floatUp linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); }
+    to { transform: translateY(-110vh); }
+}
+
+
+/*Из-за этого кнопка "Неm" убегает за пределы экрана, а не просто внутри него. ХЗ как это пофиксить*/
+/* Плавное появление */
+/* @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+} */
+
+</style>
+</head>
+
+<body>
+<main class="card">
+    <h1 class="title">
+        Willst du mein Valentin sein? 
+        <span class="heart">❤️</span>
+    </h1>
+
+    <div class="button-block">
+        <button class="yes" onclick="yes()">Ja 😏</button>
+        <button class="no" id="noBtn">Nein 🙃</button>
+    </div>
+</main>
+
+<div class="floating-hearts"></div>
+
+<script>
+const hearts = document.querySelector(".floating-hearts");
+
+for (let i = 0; i < 18; i++) {
+    let heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.className = "float-heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+    heart.style.fontSize = 14 + Math.random() * 20 + "px";
+    hearts.appendChild(heart);
+}
+
+
+function yes() {
+    document.body.innerHTML = `
+    <div class="final-screen">
+        <div class="final-card">
+            <h1>Ich wusste es doch ❤️</h1>
+            <p>Jetzt gehörst du für immer zu mir 💘</p>
+
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHFweGtyeXpzczV6aDF3em02YjE1Z3JiNTFtZmZucXBwMTRkOHl5biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/m7URgFktt1JjDPjGKy/giphy.gif">
+        </div>
+    </div>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .final-screen {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #ff9a9e, #fad0c4);
+            animation: fadeIn 1s ease;
+        }
+
+        .final-card {
+            backdrop-filter: blur(12px);
+            padding: 30px 25px;
+            border-radius: 24px;
+            text-align: center;
+            color: white;
+            max-width: 420px;
+            width: 90%;
+        }
+
+        .final-card h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .final-card p {
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .final-card img {
+            width: 100%;
+            border-radius: 18px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity:0; transform: scale(0.95); }
+            to { opacity:1; transform: scale(1); }
+        }
+    </style>
+    `;
+
+    confetti({
+        particleCount: 180,
+        spread: 120,
+        origin: { y: 0.6 }
+    });
+}
+
+const btn = document.getElementById("noBtn");
+let activated = false;
+
+function run() {
+    const rect = btn.getBoundingClientRect(); // ← ВАЖНО
+
+    if (!activated) {
+        activated = true;
+
+        btn.style.position = "fixed";
+        btn.style.width = rect.width + "px";
+        btn.style.height = rect.height + "px";
+        btn.style.left = rect.left + "px";
+        btn.style.top = rect.top + "px";
+        btn.style.margin = "0";
+        btn.style.zIndex = "9999";
+    }
+
+    const padding = 16;
+
+    const btnWidth = btn.offsetWidth;
+    const btnHeight = btn.offsetHeight;
+
+    const maxX = window.innerWidth - btnWidth - padding;
+    const maxY = window.innerHeight - btnHeight - padding;
+
+    const x = Math.max(padding, Math.random() * maxX);
+    const y = Math.max(padding, Math.random() * maxY);
+
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+btn.addEventListener("mouseenter", run);
+btn.addEventListener("touchstart", run);
+</script>
+
+</body>
+</html>
